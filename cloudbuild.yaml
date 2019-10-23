@@ -1,4 +1,5 @@
 steps:
+- name: 'quay.io/sharelatex/texlive-full:2017.1'
 - name: 'gcr.io/overleaf-ops/cloud-builder'
   args: 
   - 'build'
