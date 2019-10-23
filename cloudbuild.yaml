@@ -20,5 +20,6 @@ steps:
   - 'DOCKER_COMPOSE_FLAGS=-f docker-compose.ci.yml'
   - 'BUILD_NUMBER=$SHORT_SHA'
   - 'BRANCH_NAME=$BRANCH_NAME'
+  - 'TEXLIVE_IMAGE=gcr.io/overleaf-ops/texlive-full:2018.1.002'
 images:
   - 'gcr.io/$PROJECT_ID/clsi:${BRANCH_NAME}-${SHORT_SHA}'
