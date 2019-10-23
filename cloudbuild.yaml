@@ -1,4 +1,5 @@
 steps:
+- name: 'gcr.io/overleaf-ops/texlive-full:2018.1.002'
 - name: 'gcr.io/overleaf-ops/cloud-builder'
   args: 
   - 'build'
