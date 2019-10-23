@@ -24,3 +24,6 @@ steps:
 images:
   - 'gcr.io/$PROJECT_ID/clsi:${BRANCH_NAME}-${SHORT_SHA}'
 timeout: 1800s
+options:
+  diskSizeGb: 200
+  machineType: 'N1_HIGHCPU_8'
