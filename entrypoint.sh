@@ -1,5 +1,6 @@
 #!/bin/sh
 
+date
 echo "Changing permissions of /var/run/docker.sock for sibling containers"
 ls -al /var/run/docker.sock
 docker --version
@@ -21,5 +22,7 @@ chown -R node:node /app
 
 chown -R node:node /app/bin
 
-./bin/install_texlive_gce.sh
+date
+echo "Running bin/install_texlive_gce.sh"
+time ./bin/install_texlive_gce.sh
 exec runuser -u node -- "$@"
