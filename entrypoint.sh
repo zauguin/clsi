@@ -2,5 +2,5 @@
 
 set -o pipefail
 
-inner-entrypoint.sh "$@" | ts
+/app/inner-entrypoint.sh "$@" 2>&1 | ts
 

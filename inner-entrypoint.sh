@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -x
+
 date
 echo "Changing permissions of /var/run/docker.sock for sibling containers"
 ls -al /var/run/docker.sock

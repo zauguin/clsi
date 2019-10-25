@@ -1,10 +1,5 @@
 FROM node:10.15.0 as app
 
-RUN \
-   apt -y update && \
-   apt -y install moreutils
-
-
 WORKDIR /app
 
 #wildcard as some files may not be in all repos
@@ -18,6 +13,10 @@ COPY . /app
 RUN npm run compile:all
 
 FROM node:10.15.0
+
+RUN \
+   apt -y update && \
+   apt -y install moreutils
 
 COPY --from=app /app /app
 
