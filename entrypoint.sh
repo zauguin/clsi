@@ -22,7 +22,4 @@ chown -R node:node /app
 
 chown -R node:node /app/bin
 
-date
-echo "Running bin/install_texlive_gce.sh"
-time ./bin/install_texlive_gce.sh
 exec runuser -u node -- "$@"
