@@ -1,19 +1,25 @@
 steps:
-- name: 'gcr.io/overleaf-ops/texlive-full:2017.1'
-- name: 'gcr.io/overleaf-ops/cloud-builder'
+- id: texlive
+  name: 'gcr.io/overleaf-ops/texlive-full:2017.1'
+- id: build
+  name: 'gcr.io/overleaf-ops/cloud-builder'
   args: 
   - 'build'
   env:
   - 'BUILD_NUMBER=$SHORT_SHA'
   - 'BRANCH_NAME=$BRANCH_NAME'
-- name: 'gcr.io/overleaf-ops/cloud-builder'
+- id: test_unit
+  name: 'gcr.io/overleaf-ops/cloud-builder'
   args: 
   - 'test_unit'
   env:
   - 'DOCKER_COMPOSE_FLAGS=-f docker-compose.ci.yml'
   - 'BUILD_NUMBER=$SHORT_SHA'
   - 'BRANCH_NAME=$BRANCH_NAME'
-- name: 'gcr.io/overleaf-ops/cloud-builder'
+  waitFor:
+  - build
+- id: test_acceptance
+  name: 'gcr.io/overleaf-ops/cloud-builder'
   args: 
   - 'test_acceptance'
   env:
@@ -21,6 +27,9 @@ steps:
   - 'BUILD_NUMBER=$SHORT_SHA'
   - 'BRANCH_NAME=$BRANCH_NAME'
   - 'TEXLIVE_IMAGE=gcr.io/overleaf-ops/texlive-full:2017.1'
+  waitFor:
+  - build
+  - texlive
 images:
   - 'gcr.io/$PROJECT_ID/clsi:${BRANCH_NAME}-${SHORT_SHA}'
 timeout: 1800s
