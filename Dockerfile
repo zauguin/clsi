@@ -1,5 +1,10 @@
 FROM node:10.15.0 as app
 
+RUN \
+   apt -y update && \
+   apt -y install moreutils
+
+
 WORKDIR /app
 
 #wildcard as some files may not be in all repos
