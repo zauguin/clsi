@@ -8,6 +8,7 @@ steps:
   env:
   - 'BUILD_NUMBER=$SHORT_SHA'
   - 'BRANCH_NAME=$BRANCH_NAME'
+  waitFor: ['-']
 - id: test_unit
   name: 'gcr.io/overleaf-ops/cloud-builder'
   args: 
