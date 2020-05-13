@@ -53,9 +53,12 @@ module.exports = CompileManager = {
     }
     const compileDir = getCompileDir(request.project_id, request.user_id)
     const lockFile = Path.join(compileDir, '.project-lock')
+    // create local home and tmp directories in the compile dir
+    const homeDir = Path.join(compileDir, '.project-home')
+    const tmpDir = Path.join(compileDir, '.project-tmp')
     // use a .project-lock file in the compile directory to prevent
     // simultaneous compiles
-    return fse.ensureDir(compileDir, function(error) {
+    async.each([compileDir, homeDir, tmpDir], fse.ensureDir, function (error) {
       if (error != null) {
         return callback(error)
       }
