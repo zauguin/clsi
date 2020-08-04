@@ -274,13 +274,6 @@ module.exports = DockerRunner = {
         env[key] = value
       }
     }
-    // set the path based on the image year
-    if ((m = image.match(/:([0-9]+)\.[0-9]+/))) {
-      year = m[1]
-    } else {
-      year = '2014'
-    }
-    env.PATH = `/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/texlive/${year}/bin/x86_64-linux/`
     const options = {
       Cmd: command,
       Image: image,
