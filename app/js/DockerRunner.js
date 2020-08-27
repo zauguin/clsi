@@ -420,7 +420,19 @@ module.exports = DockerRunner = {
 
     const createAndStartContainer = () =>
       dockerode.createContainer(options, function (error, container) {
-        if (error != null) {
+        if ((error != null ? error.statusCode : undefined) === 404) {
+          return dockerode.pull(options.Image, function (error, image) {
+            if (error != null) {
+              return callback(error)
+            }
+            dockerode.createContainer(options, function (error, container) {
+              if (error != null) {
+                return callback(error)
+              }
+              return startExistingContainer()
+            })
+          })
+        } else if (error != null) {
           return callback(error)
         }
         return startExistingContainer()
