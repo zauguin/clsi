@@ -94,8 +94,8 @@ module.exports = DockerRunner = {
     }
 
     if (Settings.texliveImageNameOveride != null) {
-      const img = image.split('/')
-      image = `${Settings.texliveImageNameOveride}/${img[2]}`
+      const img = /[^\/]*$/.exec(image)[0]
+      image = `${Settings.texliveImageNameOveride}/${img}`
     }
 
     const options = DockerRunner._getContainerOptions(
